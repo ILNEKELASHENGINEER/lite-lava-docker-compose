@@ -1,4 +1,0 @@
-{% extends 'docker.jinja2' %}
-{# Allow to run HTTP server inside, and access from DUT via port 8980. #}
-{# Extra spaces are workaround for https://git.lavasoftware.org/lava/lava/-/issues/384, to be fixed in LAVA 2020.04 #}
-{% set docker_extra_arguments = [" -e ", "SABINE_IP_ADDR=192.168.97.1 "] %}
