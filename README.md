@@ -1,5 +1,5 @@
-lite-lava-docker-compose
-========================
+lite-lava-docker-compose (UPDATED)
+===================================
 
 This is a Linaro LITE customized fork of LAVA dockerized setup. Instructions
 for it are available in the
@@ -7,7 +7,7 @@ for it are available in the
 
 Below is the original README.
 
--------
+--------------
 
 docker-compose
 ==============
@@ -35,8 +35,8 @@ Installing
 
 You just need to fetch the sources:
 
-    git clone https://git.lavasoftware.org/lava/pkg/docker-compose
-    cd docker-compose
+    git clone https://github.com/ILNEKELASHENGINEER/lite-lava-docker-compose.git
+    cd lite-lava-docker-compose
 
 Using it
 --------
