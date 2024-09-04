@@ -1,0 +1,47 @@
+# A simple job demonstrating how to boot a docker image in LAVA.
+job_name: docker-busybox-test3
+
+device_type: docker
+visibility: public
+
+timeouts:
+  job:
+    seconds: 120
+  action:
+    seconds: 30
+
+actions:
+
+- deploy:
+    to: docker
+    image: ubuntu:latest
+# When directly specifying "image: <name>", LAVA will try to docker-pull
+# this image to get the latest version. During development, when you
+# know that you already have the latest version locally, you can save
+# a bit on traffic/test execution overhead with:
+#    image:
+#        name: busybox
+#        local: true
+
+- boot:
+    method: docker
+    # Command to execute in container. Can be set to empty string ("") to use
+    # image's default command.
+    command: "ls -a"
+    #command: "ping google.com"
+    #command: "ping 192.168.91.137"
+    prompts:
+    - '/ #'
+
+- test:
+    timeout:
+      seconds: 15
+
+    monitors:
+    - name: wait-finish
+      # Empty start is ok (will start with the beginning of output)
+      start: ""
+      # Something in the last line of output
+      end: "var"
+      # This is ignored
+      pattern: "__ignored__"

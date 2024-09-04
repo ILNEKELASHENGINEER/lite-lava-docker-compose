@@ -1,0 +1,41 @@
+job_name: dockertest-1
+
+device_type: docker
+
+visibility: public
+
+timeouts:
+  job:
+    seconds: 60
+  action:
+    seconds: 60
+
+actions:
+
+- deploy:
+    to: docker
+    image:
+        name: vav_test_image
+        local: true
+
+- boot:
+    method: docker
+    # Use the default command of the image or specify an alternative if needed
+    command: ""
+    prompts:
+    - 'pipeline@lava:~$'
+
+- test:
+    timeout:
+      seconds: 30
+
+    interactive:
+    - name: ls_command_test
+      prompts: ["pipeline@lava:~$"]
+      script:
+      - command: "capture 10"
+        successes:
+        - message: "Unable to connect to 127.0.0.1" # Set this to a specific success message or leave empty if any output is acceptable.
+
+      # Ensure the prompt is present after running the command
+      #- command: "whoami"
